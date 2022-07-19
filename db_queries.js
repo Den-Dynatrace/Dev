@@ -43,11 +43,11 @@ function tagQuery(tag, language){
   });
 }
 
-async function numberQuery(query){ 
+async function numberQuery(query, user){ 
 //SIMPLE QUERY//
 return new Promise(function(resolve, reject) {
   const connect = client.db("SME_Tracker")
-  connect.collection("Erik.Sundblad").find(query).toArray( async function(err, docs) {
+  connect.collection(user).find(query).toArray( async function(err, docs) {
    if (err) {
      // Reject the Promise with an error
      return reject(err)
@@ -72,6 +72,16 @@ async function empID(user){
   })
 }
 
+function dropCollection(user){
+  client.connect(err => {
+    const collection = client.db("SME_Tracker").collection(user)
+    if (err) throw err;
+    collection.drop(function(err, res){
+      if (err) throw err;
+      console.log("Collection Droped")
+    })
+  })
+}
 
 exports.numberQuery = numberQuery
 exports.empID = empID
