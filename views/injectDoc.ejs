@@ -2,45 +2,150 @@
     <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script language="javascript" type="text/javascript">
-    function dynamicdropdown(listindex)
+    function subCatagory(listindex)
     {
         switch (listindex)
         {
-        case "manual" :
-            document.getElementById("status").options[0]=new Option("Select status","");
-            document.getElementById("status").options[1]=new Option("OPEN","open");
-            document.getElementById("status").options[2]=new Option("DELIVERED","delivered");
+        case "Content and lab development" :
+            document.getElementById("status").options[0]=new Option("Select","");
+            document.getElementById("status").options[1]=new Option("Develop and continuously improve coaching session, webinar, and Dynatrace University content","Develop and continuously improve coaching session, webinar, and Dynatrace University content");
+            document.getElementById("status").options[2]=new Option("Deliver internal Technical Product Specialist training","Deliver internal Technical Product Specialist training");
+            document.getElementById("status").options[3]=new Option("Partner with other teams to develop Dynatrace best practices","Partner with other teams to develop Dynatrace best practices");
+            document.getElementById("status").options[4]=new Option("Assist in building lab environments","Assist in building lab environments");
             break;
-        case "online" :
-            document.getElementById("status").options[0]=new Option("Select status","");
-            document.getElementById("status").options[1]=new Option("OPEN","open");
-            document.getElementById("status").options[2]=new Option("DELIVERED","delivered");
-            document.getElementById("status").options[3]=new Option("SHIPPED","shipped");
+        case "Product feedback (product, self-help, internal processes)" :
+            document.getElementById("status").options[0]=new Option("Select","");
+            document.getElementById("status").options[1]=new Option("Analyze chats/tickets","Analyze chats/tickets");
+            document.getElementById("status").options[2]=new Option("Develop content to help deflect chats","Develop content to help deflect chats");
+            document.getElementById("status").options[3]=new Option("Work with Product Management/R&D to improve product self-service","Work with Product Management/R&D to improve product self-service");
+            break;
+        case "D1 representative/evangelist (internal and external)" :
+            document.getElementById("status").options[0]=new Option("Select","");
+            document.getElementById("status").options[1]=new Option("Participate in cross-functional SWAT, Value Creation, etc. teams","Participate in cross-functional SWAT, Value Creation, etc. teams");
+            document.getElementById("status").options[2]=new Option("Author internal, corporate, and 3rdparty blog articles","Author internal, corporate, and 3rdparty blog articles");
+            document.getElementById("status").options[3]=new Option("Develop and present at internal, corporate, and 3rdparty technical conferences","Develop and present at internal, corporate, and 3rdparty technical conferences");
+            document.getElementById("status").options[4]=new Option("TPS work and results are recognized by global team","TPS work and results are recognized by global team");
+            break;
+        case "Recognition & impact" :
+            document.getElementById("status").options[0]=new Option("Select","");
+            document.getElementById("status").options[1]=new Option("Continue to expand technical knowledge and stay ahead of industry trends","Continue to expand technical knowledge and stay ahead of industry trends");
+            document.getElementById("status").options[2]=new Option("Engage on ad-hoc customer meetings/coaching sessions/Q&A","Engage on ad-hoc customer meetings/coaching sessions/Q&A");
+            document.getElementById("status").options[3]=new Option("Act as an escalation point","Act as an escalation point");
+            document.getElementById("status").options[4]=new Option("Participate in internal process development and continuous improvement","Participate in internal process development and continuous improvement");
+            break;       
+        }
+    }
+    
+    function metric(subcat)
+    {
+        switch (subcat)
+        {
+        case "Develop and continuously improve coaching session, webinar, and Dynatrace University content":
+            document.getElementById("metric").options[0]=new Option("Select","");
+            document.getElementById("metric").options[1]=new Option("# of sessions","# of sessions");
+            document.getElementById("metric").options[2]=new Option("# of videos","# of videos");
+            document.getElementById("metric").options[3]=new Option("# of University Content","# of University Content");
+            break;
+        case "Deliver internal Technical Product Specialist training":
+            document.getElementById("metric").options[0]=new Option("Select","");
+            document.getElementById("metric").options[1]=new Option("# of training delivered","# of training delivered");
+            document.getElementById("metric").options[2]=new Option("% CSAT Score","% CSAT Score");
+            break;
+        case "Partner with other teams to develop Dynatrace best practices":
+            document.getElementById("metric").options[0]=new Option("Select","");
+            document.getElementById("metric").options[1]=new Option("# of meetings participated in","# of meetings participated in");
+            document.getElementById("metric").options[2]=new Option("# of best practice guides","# of best practice guides");
+            document.getElementById("metric").options[3]=new Option("# of topics developed","# of topics developed");
+            break;
+        case "Assist in building lab environments":
+            document.getElementById("metric").options[0]=new Option("Select","");
+            document.getElementById("metric").options[1]=new Option("# of lab environments developed","# of lab environments developed");
+            document.getElementById("metric").options[2]=new Option("# of others using labs","# of others using labs");
+            document.getElementById("metric").options[3]=new Option("# of others participating in lab development","# of others participating in lab development");
+            break;
+        case "Analyze chats/tickets":
+            document.getElementById("metric").options[0]=new Option("Select","");
+            document.getElementById("metric").options[1]=new Option("# of topics reviewed","# of topics reviewed");
+            document.getElementById("metric").options[2]=new Option("# of trends identified","# of trends identified");
+            document.getElementById("metric").options[3]=new Option("# of recommendations provided","# of recommendations provided");
+            break;
+        case "Develop content to help deflect chats":
+            document.getElementById("metric").options[0]=new Option("Select","");
+            document.getElementById("metric").options[1]=new Option("# of Answer bots developed","# of Answer bots developed");
+            document.getElementById("metric").options[2]=new Option("# of TKBs created/edited","# of TKBs created/edited");
+            document.getElementById("metric").options[3]=new Option("# of articles written","# of articles written");
+            document.getElementById("metric").options[4]=new Option("#/% inc. of self-help","#/% inc. of self-help");
+            document.getElementById("metric").options[5]=new Option("#/% decrease in chats","#/% decrease in chats");
+            break;
+        case "Work with Product Management/R&D to improve product self-service":
+            document.getElementById("metric").options[0]=new Option("Select","");
+            document.getElementById("metric").options[1]=new Option("# of product enhancements requests/released","# of product enhancements requests/released");
+            document.getElementById("metric").options[2]=new Option("#/% increase of self-help","#/% increase of self-help");
+            document.getElementById("metric").options[3]=new Option("#/% decrease in chats","#/% decrease in chats");
+            break;
+        case "Participate in cross-functional SWAT, Value Creation, etc. teams":
+            document.getElementById("metric").options[0]=new Option("Select","");
+            document.getElementById("metric").options[1]=new Option("# of meetings attended","# of meetings attended");
+            document.getElementById("metric").options[2]=new Option("# of groups represented in","# of groups represented in");
+            break;
+        case "Author internal, corporate, and 3rdparty blog articles":
+            document.getElementById("metric").options[0]=new Option("Select","");
+            document.getElementById("metric").options[1]=new Option("# of articles published","# of articles published");
+            document.getElementById("metric").options[2]=new Option("# reads per article","# reads per article");
+            break;
+        case "Develop and present at internal, corporate, and 3rdparty technical conferences":
+            document.getElementById("metric").options[0]=new Option("Select","");
+            document.getElementById("metric").options[1]=new Option("# of conferences attended","# of conferences attended");
+            document.getElementById("metric").options[2]=new Option("# of presentations shared","# of presentations shared");
+            break;            
+        case "TPS work and results are recognized by global team":
+            document.getElementById("metric").options[0]=new Option("Select","");
+            document.getElementById("metric").options[1]=new Option("# of internal meetings where TPS is highlighted","# of internal meetings where TPS is highlighted");
+            document.getElementById("metric").options[2]=new Option("# of meetings where TPS is presenting on a global or cross-regional basis","# of meetings where TPS is presenting on a global or cross-regional basis");
+            break;
+        case "Continue to expand technical knowledge and stay ahead of industry trends":
+            document.getElementById("metric").options[0]=new Option("Select","");
+            document.getElementById("metric").options[1]=new Option("# of advanced certs","# of advanced certs");
+            document.getElementById("metric").options[2]=new Option("# of advanced training courses completed","# of advanced training courses completed");
+            break;
+        case "Engage on ad-hoc customer meetings/coaching sessions/Q&A":
+            document.getElementById("metric").options[0]=new Option("Select","");
+            document.getElementById("metric").options[1]=new Option("# of customer meetings on SME topic, CSAT%","# of customer meetings on SME topic, CSAT%");
+            break;
+        case "Act as an escalation point":
+            document.getElementById("metric").options[0]=new Option("Select","");
+            document.getElementById("metric").options[1]=new Option("# hours in chat outside of shift","# hours in chat outside of shift");
+            document.getElementById("metric").options[2]=new Option("# escalations handled","# escalations handled");
+            break;
+        case "Participate in internal process development and continuous improvement":
+            document.getElementById("metric").options[0]=new Option("Select","");
+            document.getElementById("metric").options[1]=new Option("# of new/improved processes","# of new/improved processes");
+            document.getElementById("metric").options[2]=new Option("% time/efficiency improvement","% time/efficiency improvement");
             break;
         }
-        return true;
     }
     </script>
     </head>
     <title>Dynamic Drop Down List</title>
     <body>
-    <div class="category_div" id="category_div">Source:
-        <select id="source" name="source" onchange="javascript: dynamicdropdown(this.options[this.selectedIndex].value);">
-        <option value="">Select source</option>
-        <option value="manual">MANUAL</option>
-        <option value="online">ONLINE</option>
+    <div class="category_div" id="category_div">Catagory:
+        <select  id="Catagory" name="Catagory" onchange= "disabled=true; javascript: subCatagory(this.options[this.selectedIndex].value);">
+        <option value="">Select</option>
+        <option value="Content and lab development">Content and lab development</option>
+        <option value="Product feedback (product, self-help, internal processes)">Product feedback (product, self-help, internal processes)</option>
+        <option value="D1 representative/evangelist (internal and external)">D1 representative/evangelist (internal and external)</option>
+        <option value="Recognition & impact">Recognition & impact</option>
         </select>
     </div>
-    <div class="sub_category_div" id="sub_category_div">Status:
+    <div class="subcategory_div" id="subcategory_div">Sub-Catagory:
         <script type="text/javascript" language="JavaScript">
-        document.write('<select name="status" id="status"><option value="">Select status</option></select>')
+        document.write('<select name="status" id="status" onchange= "disabled=true; javascript: metric(this.options[this.selectedIndex].value);"><option value=""></option></select>')
         </script>
-        <noscript>
-        <select id="status" name="status">
-            <option value="open">OPEN</option>
-            <option value="delivered">DELIVERED</option>
-        </select>
-        </noscript>
+    </div>
+    <div class="metric_div" id="metric_div">Metric:
+        <script type="text/javascript" language="JavaScript">
+        document.write('<select name="metric" id="metric" onchange= "disabled=true"><option value=""></option></select>')
+        </script>
     </div>
     </body>
 </html>
