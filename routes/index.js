@@ -1,5 +1,6 @@
 const { json } = require('express');
 var express = require('express');
+var publicDir = require('path').join(__dirname,'/public'); 
 var router = express.Router();
 const {numberQuery, empID} = require('../db_queries.js')
 var user = "Erik.Sundblad"

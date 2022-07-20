@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <body>
+            <center><h1>Employees:</h1></center>
+            <ul id="myList"></ul>
+            <var>data=<%= lis%></var>
+            <script>
+                let data = <%= lis %>;
+                let emps = document.getElementById("myList");
+
+                data.array.forEach(element => {
+                    let emp = document.createElement("emp");
+                    emp.innerText = element;
+                });
+
+            </script>
+        </body>
+    </head>
+</html>
