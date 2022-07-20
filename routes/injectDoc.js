@@ -26,9 +26,9 @@ router.post('/', async function (req, res, next) {
     "Notes" : notes,
     "Tag" : tag
     }
-    console.log(doc)
-    //inject(user, doc)
-    //res.redirect('/')
+    //console.log(doc)
+    inject(user, doc)
+    res.redirect('/')
   })
 
 module.exports = router;
