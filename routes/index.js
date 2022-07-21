@@ -1,6 +1,5 @@
 const { json } = require('express');
 var express = require('express');
-var publicDir = require('path').join(__dirname,'/public'); 
 var router = express.Router();
 const {numberQuery, empID} = require('../db_queries.js')
 var user = "Erik.Sundblad"
@@ -11,7 +10,7 @@ results =[]
 router.get('/', async function(req, res, next) {
   id = await empID(user)
   for (let query in queries) {
-    console.log(queries[query])
+    //console.log(queries[query])
     val = await numberQuery(queries[query], user)
     console.log(val)
     results.push(val)

@@ -18,20 +18,17 @@ function inject(user, doc){
 }
 
 
-function employeeNames(){
-    //COLLECTION NAMES//
-    employees = []
-    client.connect(err => {
-    const connect = client.db("SME_Tracker")
-    connect.listCollections().toArray(function(err, names) {   
-        if(err) throw err;
-        for (let item in names){
-            //console.log(names[item]['name'])
-            employees.concat([names[item]['name']])
-        };
+async function employeeNames(managerName){
+    return new Promise(function(resolve, reject) {
+      const connect = client.db("SME_Tracker")
+      connect.collection("managers").find({"name": managerName}).project({Employees: 1}).toArray(function(err, results) {   
+          if(err) {
+            return reject(err)
+          }
+          //console.log(results[0]["Employees"])
+          return resolve(results[0]["Employees"])
         });
-    });
-    return employees
+  });
 }
 
 
@@ -86,3 +83,4 @@ function dropCollection(user){
 exports.numberQuery = numberQuery
 exports.empID = empID
 exports.inject = inject
+exports.employeeNames = employeeNames

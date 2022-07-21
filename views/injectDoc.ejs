@@ -72,10 +72,12 @@ Metric: <select name="chapter" id="chapter">
     <option value="" selected="selected">Select</option>
   </select>
   <br><br>
-    <div>
+    
+  <div>
         <label for="val">Quantity</label>
         <input type="number" step="0.01" id="val" name="val">
-    </div>
+  </div>
+    
     <div class="tech_tag" id="tech_tag">Technology Tag:
         <select  id="tags" name="tags">
         <option value="">Select</option>
@@ -85,14 +87,17 @@ Metric: <select name="chapter" id="chapter">
         <option value="Docker">Docker</option>
         </select>
     </div>
+    
     <div>
         <label for="Proof">Link to resource (preferably saved in onedrive)</label>
         <input type="url" id="proof" name="proof">
     </div>
+    
     <div>
         <label for="Comment">Comments:</label></p>
         <textarea id="Comment" name="Comment"rows="5" cols="60"></textarea>
     </div>
+    
     <div>
         <button type="submit">Submit</button>
     </div>

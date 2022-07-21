@@ -1,19 +1,31 @@
 <html>
-    <head>
+    <head></head>
         <body>
-            <center><h1>Employees:</h1></center>
-            <ul id="myList"></ul>
-            <var>data=<%= lis%></var>
+            <form name="employeeView" id="form1" action="/manager" method="POST"> Employees:        
             <script>
-                let data = <%= lis %>;
-                let emps = document.getElementById("myList");
+                window.onload = function() {
+                    var raw = "<%= empList%>";
+                    let empList = raw.split(",");
+                    var empSelect = document.getElementById("employee")
+                    for(var x in empList){
+                        empSelect.options[empSelect.options.length] = new Option(empList[x], empList[x]);
+                    }
+                }
 
-                data.array.forEach(element => {
-                    let emp = document.createElement("emp");
-                    emp.innerText = element;
-                });
-
+                /*function myfunc(item, index) {
+                    emp += '<div><a id="empPages" href="/">' + item + '</a></div>';
+                }
+                var raw = "<%= empList%>";
+                let empList = raw.split(",");
+                let emp = "";
+                empList.forEach(myfunc);
+                document.write(emp); */                        
             </script>
+            <select id="employee" name="employee">
+                <option value="" selected="selected">Select</option>
+            </select>
+            
+            <button type="submit">View Profile</button>
+            </form>
         </body>
-    </head>
 </html>

@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
-const {inject} = require('../db_queries.js')
-var user = "Erik.Sundblad"
+const {inject} = require('../db_queries.js');
+var user = "Erik.Sundblad";
 
 /* GET Inject view */
 router.get('/', function(req, res, next) {
