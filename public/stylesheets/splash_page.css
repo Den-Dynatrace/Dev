@@ -33,13 +33,20 @@ div { position: absolute; }
 	height: 82px;
 }
 
-#fill_1 {
-	top: 15.41px;
-	left: 294.38px;
-	width: 24.15px;
-	height: 51.23px;
+#logout{
+	top:90%;
+	left: 1170px;
+	width: 350px;
+	height: 100px;
+	overflow: hidden;
+	font-size: 32px;
+	text-align: left;
+	line-height: 22px;
+	padding-top: 10px;
+	margin-top: -10px;
+	letter-spacing: 0.5px;
+	color:#1496FF;
 }
-
 
 #fill_3 {
 	top: 0.02px;
@@ -184,7 +191,7 @@ div { position: absolute; }
 
 #log_in {
 	top: 0px;
-	left: -5px;
+	left: -50px;
 	width: 112px;
 	height: 66px;
 	overflow: hidden;
@@ -210,7 +217,15 @@ div { position: absolute; }
 	left: 0px;
 	width: 171px;
 	height: 22px;
-	position: absolute;
+	position:absolute;
+}
+
+#logoutbutton_cls_a{
+	top: 500px;
+	left:0px;
+	width:350px;
+	height:100px;
+	position:absolute;
 }
 
 #yourprofile {
@@ -228,6 +243,15 @@ div { position: absolute; }
 	letter-spacing: 0.5px;
 	color:#1496FF;
 }
+
+#fill_1 {
+	top: 15px;
+	left: 297px;
+	width:  24.15px;
+	height: 50px;
+}
+
+
 
 
 

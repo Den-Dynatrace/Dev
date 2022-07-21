@@ -95,6 +95,21 @@ div { position: absolute; }
 	width: 156px;
 	height: 104px;
 }
+
+#frame_11{
+	top:5500px;
+	left: 1000px;
+	width: 350px;
+	height: 100px;
+}
+
+#logoutbutton_cls_a{
+	top: 200px;
+	left: 200px;
+	width: 350px;
+	height: 100px;
+}
+
 #backbutton_cls_a {
 	top: 24px;
 	left: 0px;
@@ -116,6 +131,18 @@ div { position: absolute; }
 	background:rgba(0,0,0,1);
 }
 
+#rectangle_20{
+	top: 5500px;
+	left: 1000px;
+	width: 350px;
+	height:100px;
+	-ms-border-radius: 10px;
+	-o-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	background:rgba(0,0,0,1);
+}
 
 #vector {
 	top: 27px;
@@ -132,6 +159,21 @@ div { position: absolute; }
 	height: 40px;
 	overflow: hidden;
 	font-family: Roboto;
+	font-size: 32px;
+	text-align: left;
+	line-height: 22px;
+	padding-top: 10px;
+	margin-top: -10px;
+	letter-spacing: 0.5px;
+	color:#1496FF;
+}
+
+#log_out{
+	top:95%;
+	left: 90%;
+	width: 350px;
+	height: 100px;
+	overflow: hidden;
 	font-size: 32px;
 	text-align: left;
 	line-height: 22px;
