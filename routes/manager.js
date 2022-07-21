@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var manager = "Bauer, Simon"
-const {employeeNames,empID,numberQuery} = require("../db_queries")
-var queries = require('../individual.js')
+var manager = "Bauer, Simon";
+const {employeeNames,empID,numberQuery} = require("../db_queries");
+var queries = require('../individual.js');
 var mgmt = true;
 
 
