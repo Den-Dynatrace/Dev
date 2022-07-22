@@ -2,11 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" >
 	<head>
 		<meta http-equiv="content-type" content="text/html" charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 		<title>splash_page</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="" >
 		<link rel="StyleSheet" href="stylesheets/splash_page.css" />
 		<script src="https://secure.exportkit.com/cdn/js/ek_googlefonts.js?v=6"></script>
+		 <!-- msal.min.js can be used in the place of msal.js; included msal.js to make debug easy -->
+		<script id="load-msal" src="https://alcdn.msauth.net/browser/2.15.0/js/msal-browser.js"
+		integrity="sha384-dFzMiVGB5HpWZ+5w5VSif6jhWfNeplSw9ACYmQKZcY2azuT9kCxVWVI9HyfGdkHV"
+		crossorigin="anonymous"></script>
+
+		<!-- To help ensure reliability, Microsoft provides a second CDN -->
+		<script type="text/javascript">
+		if (typeof Msal === 'undefined') document.write(unescape("%3Cscript src='https://alcdn.msftauth.net/browser/2.15.0/js/msal-browser.js' type='text/javascript' crossorigin='anonymous' %3E%3C/script%3E"));
+		</script>
 	</head>
 	<body>
 		<div id="content-container" >
@@ -39,17 +48,12 @@
 				<div id="sme_tracker" >
 					SME Tracker
 				</div>
-
-			</div>
-			<form name="login/logout" id="login/logout" action="/splash" method="POST"> 
-				<button type="submit">
-					<div id="loginbutton">
-					login/logout
+				<body>
+					<div class="btn-group ml-auto dropleft">
+					  <button type="button" id="signIn" class="btn btn-secondary" onclick="signIn()">Sign-in</button>
+					  <button type="button" id="signOut" class="btn btn-success d-none" onclick="signOut()">Sign-out</button>
 					</div>
-				</button>
-					
-			</form>
-			</div>
+				  </nav>
 				<a id="editbutton_cls_a"  _par="" href="/" >
 					<div id="yourprofile" >
 						Your Profile
@@ -57,5 +61,12 @@
 
 				</a>
 		</div>
+		<!-- importing app scripts (load order is important) -->
+		<script type="text/javascript" src="javascripts/authConfig.js"></script>
+ 
+
+		<!-- <script type="text/javascript" src="./authRedirect.js"></script> -->
+		<!-- uncomment the above line and comment the line below if you would like to use the redirect flow -->
+		<script type="text/javascript" src="javascripts/authPopup.js"></script>	  
 	</body>
 </html>

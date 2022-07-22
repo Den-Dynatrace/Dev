@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 const {inject} = require('../db_queries.js');
-var user = "Erik.Sundblad";
+var user = "erik.sundblad";
 
 /* GET Inject view */
 router.get('/', function(req, res, next) {
