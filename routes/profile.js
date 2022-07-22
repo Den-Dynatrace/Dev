@@ -1,29 +1,23 @@
+const { json } = require('express');
 var express = require('express');
 var router = express.Router();
-var manager = "Bauer, Simon";
-const {employeeNames,empID,numberQuery} = require("../db_queries");
-var queries = require('../individual.js');
-var mgmt = true;
+const {numberQuery, empID} = require('../db_queries.js')
+var user = "erik.sundblad"
+var queries = require('../individual.js')
+var isAuthenticated = require('../public/javascripts/utils.js')
 
 
-/* GET manager page */
-router.get('/', async function(req, res, next) {
-  var empList = await employeeNames(manager)
-  res.render('manager', {empList});
-});
-
-router.post('/', async function(req, res, next){
-  user = req.body.employee.toLowerCase();
-  console.log(user)
+/* GET profile page. */
+router.get('/', isAuthenticated, async function(req, res, next) {
+  results =[]
   id = await empID(user)
   for (let query in queries) {
     //console.log(queries[query])
     val = await numberQuery(queries[query], user)
-    //console.log(val)
+    console.log(val)
     results.push(val)
   }
-  res.render('profile', { mgmt: mgmt,
-                        i1: id[0]._id,
+  res.render('profile', { i1: id[0]._id,
                         i2: id[0].Department,
                         i3: id[0].Position,
                         i4: id[0].Languages,
@@ -73,5 +67,5 @@ router.post('/', async function(req, res, next){
 });
 
 
-module.exports = router;
 
+module.exports = router;

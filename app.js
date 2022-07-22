@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var createError = require('http-errors');
 var express = require('express');
 var session = require('express-session')
@@ -6,10 +8,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var splashRouter = require('./routes/splash');
+var profileRouter = require('./routes/profile');
 var loginRouter = require('./routes/login');
 var injectRouter = require('./routes/injectDoc');
 var managerRouter = require('./routes/manager');
+var authRouter = require('./routes/auth');
+var logRouteRouter = require('./routes/logRoute')
 
 var app = express();
 
@@ -23,11 +27,25 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.use(session({
+  secret: process.env.EXPRESS_SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+      secure: false, // set this to true on production
+  }
+}));
+
+
 app.use('/', indexRouter);
-app.use('/splash2', splashRouter);
+app.use('/profile', profileRouter);
 app.use('/login', loginRouter);
 app.use('/injectDoc', injectRouter);
 app.use('/manager', managerRouter);
+app.use('/auth', authRouter);
+app.use('/logRoute', logRouteRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

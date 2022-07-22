@@ -1,6 +1,6 @@
 require("dotenv").config();
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb://sme-database:ulb91PoDqNRdCLBvnBjcjQQPBzeOabzijeeOyBsIkryMeBD8VPmbMvO9FxzxQzsxxRD61RJdG4HmGmN0AvlpAg==@sme-database.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&maxIdleTimeMS=120000&appName=@sme-database@";
+const uri = process.env.MONGO_URI
 const client = new MongoClient(uri);
 
 
