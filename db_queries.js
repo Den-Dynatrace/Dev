@@ -20,10 +20,10 @@ function inject(user, doc){
 
 async function employeeListUpdate(manager, emp){
   return new Promise(function(resolve, reject){
-    const connect = client.db("SME_TRacker")
+    const connect = client.db("SME_Tracker")
     connect.collection("managers").updateOne(
-      {"_id": manager},
-      { "$addToSet": {"Employees": emp}}
+      {_id: manager},
+      { $addToSet: {Employees: emp}}
     )
     return resolve(true)
   })

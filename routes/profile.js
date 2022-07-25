@@ -1,10 +1,9 @@
-const { json } = require('express');
 var express = require('express');
 var router = express.Router();
-const {numberQuery, empID, newUser} = require('../db_queries.js')
+const {numberQuery, empID} = require('../db_queries.js')
 var queries = require('../individual.js')
 const {isAuthenticated, isMGMT} = require('../public/javascripts/utils.js')
-const fetch = require('../public/javascripts/fetch.js')
+
 
 
 /* GET profile page. */
