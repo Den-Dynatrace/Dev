@@ -13,7 +13,8 @@ var loginRouter = require('./routes/login');
 var injectRouter = require('./routes/injectDoc');
 var managerRouter = require('./routes/manager');
 var authRouter = require('./routes/auth');
-var logRouteRouter = require('./routes/logRoute')
+var logRouteRouter = require('./routes/logRoute');
+var mgmtRouter = require('./routes/mgmt')
 
 var app = express();
 
@@ -45,6 +46,7 @@ app.use('/injectDoc', injectRouter);
 app.use('/manager', managerRouter);
 app.use('/auth', authRouter);
 app.use('/logRoute', logRouteRouter);
+app.use('/mgmt', mgmtRouter);
 
 
 // catch 404 and forward to error handler
