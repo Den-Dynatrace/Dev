@@ -1,37 +1,29 @@
 var axios = require('axios').default;
+const {mgmtList} = require('../../db_queries')
 
 
 function isAuthenticated(req, res, next) {
     if (!req.session.isAuthenticated) {
-        return res.redirect('/splash'); // redirect to sign-in route
+        return res.redirect('/'); // redirect to sign-in route
     }
 
     next();
 };
 
 
-/**
- * Attaches a given access token to a MS Graph API call
- * @param endpoint: REST API endpoint to call
- * @param accessToken: raw access token string
- */
-async function fetch(endpoint, accessToken) {
-    const options = {
-        headers: {
-            Authorization: `Bearer ${accessToken}`
+async function isMGMT(req, res, next) {
+    tokenClaims = req.session.account.idTokenClaims;
+    //console.log(tokenClaims.preferred_username)
+    managerEmail = tokenClaims.preferred_username;
+    mgmt = await mgmtList();
+    for(var mgrs in mgmt){
+        if(managerEmail == mgmt[mgrs]["_id"] ){
+            res.redirect("/manager")
         }
-    };
-
-    console.log(`request made to ${endpoint} at: ` + new Date().toString());
-
-    try {
-        const response = await axios.get(endpoint, options);
-        return await response.data;
-    } catch (error) {
-        throw new Error(error);
-    }
+        //console.log(result[mgmt]["_id"])
+      }
+      next();
 }
 
 
-
-module.exports = {isAuthenticated, fetch};
+module.exports = {isAuthenticated, isMGMT};

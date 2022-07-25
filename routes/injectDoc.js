@@ -2,14 +2,17 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 const {inject} = require('../db_queries.js');
-var user = "erik.sundblad";
+const {isAuthenticated, isMGMT} = require('../public/javascripts/utils.js')
+
 
 /* GET Inject view */
-router.get('/', function(req, res, next) {
+router.get('/', isAuthenticated, isMGMT, function(req, res, next) {
   res.render('injectDoc');
 });
 
 router.post('/', async function (req, res, next) {
+  tokenClaims = req.session.account.idTokenClaims;
+  var user = tokenClaims.preferred_username.split("@")
   var overall = await req.body.subject;
   var subcat = await req.body.topic;
   var metric = await req.body.chapter;
@@ -26,7 +29,7 @@ router.post('/', async function (req, res, next) {
     "Tag" : tag
     }
     //console.log(doc)
-    inject(user, doc)
+    inject(user[0], doc)
     res.redirect('/')
   })
 

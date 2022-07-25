@@ -1,5 +1,6 @@
 require("dotenv").config();
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const fetch = require("./public/javascripts/fetch.js")
+const { MongoClient } = require('mongodb');
 const uri = process.env.MONGO_URI
 const client = new MongoClient(uri);
 
@@ -17,16 +18,41 @@ function inject(user, doc){
     });
 }
 
+async function employeeListUpdate(manager, emp){
+  return new Promise(function(resolve, reject){
+    const connect = client.db("SME_TRacker")
+    connect.collection("managers").updateOne(
+      {"_id": manager},
+      { "$addToSet": {"Employees": emp}}
+    )
+    return resolve(true)
+  })
+}
 
-async function employeeNames(managerName){
+
+async function mgmtList(){
+  return new Promise(function(resolve, reject){
+    const connect = client.db("SME_Tracker")
+    connect.collection("managers").find({}).project({_id:1}).toArray(function(err, result){
+      console.log(result)
+      if(err) {
+        return reject(err)
+      }
+      return resolve(result)
+    })
+  })
+}
+
+
+async function employeeNames(managerEmail){
     return new Promise(function(resolve, reject) {
       const connect = client.db("SME_Tracker")
-      connect.collection("managers").find({"name": managerName}).project({Employees: 1}).toArray(function(err, results) {   
+      connect.collection("managers").find({"_id": managerEmail}).toArray(function(err, results) {   
           if(err) {
             return reject(err)
           }
           //console.log(results[0]["Employees"])
-          return resolve(results[0]["Employees"])
+          return resolve(results[0])
         });
   });
 }
@@ -80,7 +106,38 @@ function dropCollection(user){
   })
 }
 
-exports.numberQuery = numberQuery
-exports.empID = empID
-exports.inject = inject
-exports.employeeNames = employeeNames
+async function newUser(userInfo, mgmt){
+  id = userInfo.mail.split("@")
+  console.log(userInfo)
+  id_doc = {
+  "_id" : id[0],
+  "id_card" : "ID Card",
+  "Position" : userInfo.jobTitle,
+  "Location": userInfo.officeLocation,
+  "name": userInfo.givenName + " " + userInfo.surname,
+  "manager": mgmt
+  }
+  return new Promise(function(resolve, reject){
+    client.connect(err => {
+      const collection = client.db("SME_Tracker").collection(id[0]);
+      if (err) return reject(err) ;
+      collection.insertOne(id_doc, function(err, res){
+          if (err) return reject(err);
+          console.log("Inserted Docs");
+          return resolve(true);
+      });
+  })
+});
+}
+
+
+
+module.exports = {
+numberQuery,
+empID,
+inject,
+employeeNames,
+mgmtList,
+newUser,
+employeeListUpdate
+};

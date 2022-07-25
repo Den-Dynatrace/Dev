@@ -14,7 +14,7 @@ var injectRouter = require('./routes/injectDoc');
 var managerRouter = require('./routes/manager');
 var authRouter = require('./routes/auth');
 var logRouteRouter = require('./routes/logRoute');
-var mgmtRouter = require('./routes/mgmt')
+var newUserRouter = require('./routes/newUser');
 
 var app = express();
 
@@ -46,7 +46,8 @@ app.use('/injectDoc', injectRouter);
 app.use('/manager', managerRouter);
 app.use('/auth', authRouter);
 app.use('/logRoute', logRouteRouter);
-app.use('/mgmt', mgmtRouter);
+app.use('/newUser', newUserRouter);
+
 
 
 // catch 404 and forward to error handler

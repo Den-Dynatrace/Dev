@@ -12,13 +12,13 @@
             <div id ="content-container">
                 <div id="_bg__profilepagemanager"></div>
                 <div id ="profilename">
-                    Simon Bauer
+                    <%= name%> 
                 </div>
                 <div id="position">
-                    Position: Product Specialist Manager
+                    Email: <%= email%>
                 </div>
                 <div id="location">
-                    Office: Denver, CO
+                    Title:<%= title%>
                 </div>
                 <div id="frame"  >
 
@@ -45,19 +45,13 @@
                     </div>
     
                 </div>
-                <div id="languages__english__spanish__german">
-                    Langauges: English, Spanish, German
-                </div>
-                <div id="certifications__aws__azure">
-                    Certifications: AWS, Azure
-                </div>
                 <div id = "employees_">
                     Employees:
                 </div>
                 <form name="employeeView" id="employeeslist_" action="/manager" method="POST" style="color: 1496FF; position:relative; top: 425px; left: 250px;">       
                 <script>
                     window.onload = function() {
-                        var raw = "<%= empList%>";
+                        var raw = "<%= managerList%>";
                         let empList = raw.split(",");
                         var empSelect = document.getElementById("employee")
                         for(var x in empList){
