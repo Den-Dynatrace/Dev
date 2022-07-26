@@ -69,13 +69,14 @@ function tagQuery(tag, language){
 async function numberQuery(query, user){ 
 //SIMPLE QUERY//
 return new Promise(function(resolve, reject) {
+  
   const connect = client.db("SME_Tracker")
   connect.collection(user).find(query).toArray( async function(err, docs) {
    if (err) {
      // Reject the Promise with an error
      return reject(err)
    }
-   console.log(docs.length)
+   console.log(docs)
    // Resolve (or fulfill) the promise with data
    return await resolve(docs.length)
  })

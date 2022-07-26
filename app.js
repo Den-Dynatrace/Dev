@@ -9,7 +9,6 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var profileRouter = require('./routes/profile');
-var loginRouter = require('./routes/login');
 var injectRouter = require('./routes/injectDoc');
 var managerRouter = require('./routes/manager');
 var authRouter = require('./routes/auth');
@@ -41,7 +40,6 @@ app.use(session({
 
 app.use('/', indexRouter);
 app.use('/profile', profileRouter);
-app.use('/login', loginRouter);
 app.use('/injectDoc', injectRouter);
 app.use('/manager', managerRouter);
 app.use('/auth', authRouter);
