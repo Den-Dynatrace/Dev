@@ -15,13 +15,18 @@ router.get('/', isAuthenticated, isMGMT, async function(req, res, next) {
     for(var item in raw){
         mList.push(raw[item]["_id"])
     }
-    //console.log(mList)
+    
     const userInfo = await fetch(GRAPH_ME_ENDPOINT, req.session.accessToken);
+    //GRAPH_MANAGER = GRAPH_ME_ENDPOINT + "/manager";
+    //console.log(GRAPH_MANAGER);
+    //const manager = await fetch(GRAPH_MANAGER, req.session.accessToken);
+    //console.log(manager)
     res.render('newUser', {name:  userInfo.givenName + ' ' + userInfo.surname,
                            email: userInfo.mail,
                            position: userInfo.jobTitle,
                            location: userInfo.officeLocation,
                            mgmtList: mList });
+    
   });
   
   router.post('/', async function(req,res, next){

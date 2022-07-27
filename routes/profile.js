@@ -68,7 +68,7 @@ router.get('/', isAuthenticated, isMGMT, async function(req, res, next) {
                         });
   }
   else{
-   res.redirect("newUser")
+   res.redirect("auth/acquireToken")
   }    
 });
 
