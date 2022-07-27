@@ -121,11 +121,11 @@ router.get('/acquireToken', async function (req, res, next) {
 
     const authCodeUrlRequestParams = {
         state: state,
-        scopes: ["User.Read"],
+        scopes: ["User.Read", "Directory.Read.All"],
     };
 
     const authCodeRequestParams = {
-        scopes: ["User.Read"],
+        scopes: ["User.Read", "Directory.Read.All"],
     };
 
     // trigger the first leg of auth code flow
