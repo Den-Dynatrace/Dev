@@ -178,6 +178,22 @@ async function newManager(manager){
   })
 }
 
+//COLLECTION NAMES//
+function getCollections(){
+  return new Promise(function(resolve, reject) {
+    const connect = client.db("SME_Tracker")
+    emps = []
+    connect.listCollections().toArray(function(err, cols){
+      if (err){return reject(err)}
+      for(entries in cols){
+        if(cols[entries]["name"]!= "managers"){
+          emps.push(cols[entries]["name"])
+        }
+      }
+      return resolve(emps)
+      });
+  });
+}
 
 module.exports = {
 numberQuery,
@@ -189,5 +205,6 @@ newUser,
 employeeListUpdate,
 newManager,
 managagerUpdate,
-removeEmp
+removeEmp,
+getCollections
 };
