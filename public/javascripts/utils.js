@@ -11,18 +11,18 @@ function isAuthenticated(req, res, next) {
 };
 
 
-async function isMGMT(req, res, next) {
+async function isMGMT(req, res) {
     tokenClaims = req.session.account.idTokenClaims;
     //console.log(tokenClaims.preferred_username)
     managerEmail = tokenClaims.preferred_username;
     mgmt = await mgmtList();
     for(var mgrs in mgmt){
         if(managerEmail == mgmt[mgrs]["_id"] ){
-            res.redirect("/manager")
+            res.redirect("manager")
         }
         //console.log(result[mgmt]["_id"])
       }
-      next();
+    
 }
 
 

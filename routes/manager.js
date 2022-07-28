@@ -3,7 +3,7 @@ var router = express.Router();
 const {employeeNames,empID,numberQuery} = require("../db_queries");
 var queries = require('../individual.js');
 const {isAuthenticated} = require("../public/javascripts/utils")
-var mgmt = true;
+
 
 
 /* GET manager page */
@@ -39,7 +39,7 @@ router.post('/', async function(req, res, next){
         else if(query < 22  ) {prodFeedTot += val[0];}
         else if(query < 30 ) {evangelTot += val[0];}
         else {recogTot += val[0];}
-        //console.log(val)
+        //console.log(val) 
         results.push(val)
       }
       res.render('profile', { i0: id[0].name,
@@ -91,7 +91,7 @@ router.post('/', async function(req, res, next){
                       }
                       else{
                         //flash nothing to display
-                        res.redirect("manager")
+                        res.redirect("/")
                       }  
 });
 

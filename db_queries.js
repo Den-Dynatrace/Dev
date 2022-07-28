@@ -61,7 +61,7 @@ async function employeeNames(managerEmail){
           if(err) {
             return reject(err)
           }
-          //console.log(results[0]["Employees"])
+          console.log(results[0])
           return resolve(results[0])
         });
   });
