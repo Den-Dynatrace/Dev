@@ -8,7 +8,7 @@ const GRAPH_ME_ENDPOINT = process.env.GRAPH_API_ENDPOINT + "v1.0/me";
 
 
 /* GET profile page. */
-router.get('/', isAuthenticated, isMGMT, async function(req, res, next) {
+router.get('/',isAuthenticated, isMGMT, async function(req, res) {
   tokenClaims = req.session.account.idTokenClaims;
   var user = tokenClaims.preferred_username.split("@")
   GRAPH_MANAGER = GRAPH_ME_ENDPOINT + "/manager";
@@ -22,8 +22,10 @@ router.get('/', isAuthenticated, isMGMT, async function(req, res, next) {
   let prodFeedTot = 0;
   let evangelTot = 0;
   let recogTot = 0;
-
+  
+  console.log(user[0])
   id = await empID(user[0])
+  console.log(id)
   if(id.length > 0){
     //double check that manager hasnt been updated
     if (id[0].manager != manager_id){
@@ -61,7 +63,7 @@ router.get('/', isAuthenticated, isMGMT, async function(req, res, next) {
     res.render('profile', { i0: id[0].name,
                           i1: id[0].Position,
                           i2: id[0].Location,
-                          a0: results[0][0], a1: results.slice(0), //# of sessions
+                          a0: results[0][0], b0: results[0].slice(0),  //# of sessions
                           a1: results[1][0], //# of videos
                           a2: results[2][0], //# of DU Content
                           a3: results[3][0], //# of treainings del.
@@ -105,9 +107,11 @@ router.get('/', isAuthenticated, isMGMT, async function(req, res, next) {
                           v4: recogTot
                         });
   }
+  
   else{
-   res.redirect("newUser")
-  }    
+    res.redirect("newUser")
+  }
+   
 });
 
 

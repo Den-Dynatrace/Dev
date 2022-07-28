@@ -1,12 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const {mgmtList, getCollections} = require('../db_queries');
-const {isAuthenticated} = require('../public/javascripts/utils.js')
-function mgmtCheck(req, res){
-    if(!req.session.mangment){
-        res.redirect("/")
-    }
-}
+const {isAuthenticated, mgmtCheck} = require('../public/javascripts/utils.js')
+
 
 /* GET users listing. */
 router.get('/', isAuthenticated, mgmtCheck, async function(req, res) {

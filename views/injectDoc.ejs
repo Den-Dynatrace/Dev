@@ -60,7 +60,7 @@
     <script type="text/javascript">
       function launchSaveToOneDrive(){
         var odOptions = { 
-            clientId: process.env.CLIENT_ID,
+            clientId: "910cfd22-eb0f-4e34-a653-2956ff8b53f1",
             action: "save",
             sourceInputElementId: "fileUploadControl",
             sourceUri: "",
@@ -76,8 +76,6 @@
       }
     </script>
     
-    <input id="fileUploadControl" name="fileUploadControl" type="file" />
-    <button onclick="launchSaveToOneDrive">Save to OneDrive</button>
   </head>   
   <body>
   <div id="content-container"></div>
@@ -151,6 +149,9 @@
             <button type="submit" style="position:relative; top: 100px; left: 200px;">Submit</button>
         </div>
         <br><br>
+    
         </form>
+        <input id="fileUploadControl" name="fileUploadControl" type="file" />
+        <button type="submit" onclick="launchSaveToOneDrive()">Save to OneDrive</button>
     </body>
 </html>

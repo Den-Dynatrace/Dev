@@ -2,12 +2,12 @@ var express = require('express');
 var router = express.Router();
 const {employeeNames,empID,numberQuery} = require("../db_queries");
 var queries = require('../individual.js');
-const {isAuthenticated} = require("../public/javascripts/utils")
+const {isAuthenticated, mgmtCheck} = require("../public/javascripts/utils")
 
 
 
 /* GET manager page */
-router.get('/', isAuthenticated,  async function(req, res, next) {
+router.get('/', isAuthenticated, mgmtCheck, async function(req, res, next) {
   tokenClaims = req.session.account.idTokenClaims;
   var manager = tokenClaims.preferred_username;
   //console.log(manager)
@@ -18,7 +18,7 @@ router.get('/', isAuthenticated,  async function(req, res, next) {
                           elist: managerCard["Employees"]})
 });
 
-router.post('/', async function(req, res, next){
+router.post('/',isAuthenticated, async function(req, res, next){
   let results = []
   let total = 0;
   let contenLabTot = 0;

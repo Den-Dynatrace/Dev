@@ -14,7 +14,7 @@ var managerRouter = require('./routes/manager');
 var authRouter = require('./routes/auth');
 var logRouteRouter = require('./routes/logRoute');
 var newUserRouter = require('./routes/newUser');
-var deleteUserEntryRouter = require('./routes/deleteUserEntry')
+var deleteUserEntryRouter = require('./routes/deleteUserEntry');
 
 var app = express();
 
@@ -46,7 +46,7 @@ app.use('/manager', managerRouter);
 app.use('/auth', authRouter);
 app.use('/logRoute', logRouteRouter);
 app.use('/newUser', newUserRouter);
-app.use('/deleteUserEntry', deleteUserEntryRouter)
+app.use('/deleteUserEntry', deleteUserEntryRouter);
 
 
 
