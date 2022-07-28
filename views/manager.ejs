@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
-        <meta http-equiv="content-type" content="text/html" charset="utf-8" />
+        <meta http-equiv="content-type" content="text/html" charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>profilepagemanager</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="" >
         <link rel="Stylesheet" href="stylesheets/profilepagemanager.css">
         <script src="https://secure.exportkit.com/cdn/js/ek_googlefonts.js?v=6"></script>
+        <script>
+            window.onload = function() {
+                var raw = "<%= elist%>";
+                let empList = raw.split(",");
+                var empSelect = document.getElementById("employee")
+                for(var x in empList){
+                    empSelect.options[empSelect.options.length] = new Option(empList[x], empList[x]);
+                }
+            }                  
+      </script>
     </head>
         <body>
             <div id ="content-container">
@@ -49,23 +57,12 @@
                     Employees:
                 </div>
                 <form name="employeeView" id="employeeslist_" action="/manager" method="POST" style="color: 1496FF; position:relative; top: 425px; left: 250px;">       
-                <script>
-                    window.onload = function() {
-                        var raw = "<%= empList%>";
-                        let empList = raw.split(",");
-                        var empSelect = document.getElementById("employee")
-                        for(var x in empList){
-                            empSelect.options[empSelect.options.length] = new Option(empList[x], empList[x]);
-                        }
-                    }                  
-              </script>
             <select id="employee" name="employee" style="width: 500px;">
                 <option value="" selected="selected">Select</option>
             </select>
             
             <button type="submit" style="left: 100px; top:-20px;">View Profile</button>
             </form>
-            <a id="deleteEntry" href="deleteUserEntry">Remove Manager/Employee</a>
          </div>
         </body>
 </html>

@@ -32,13 +32,14 @@ router.get('/', isAuthenticated, isMGMT, async function(req, res, next) {
       let mgmList = [];
       const raw = await mgmtList();
       for(var item in raw){
-          mgmList.push(raw[item]["_id"]);
+          mgmList.push(raw[item]["_id"])
       }
       if(!mgmList.includes(manager_id)){
           await newManager(manager);
       }
 
       await employeeListUpdate(manager_id, user[0]);
+
 
     }
     
