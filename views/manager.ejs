@@ -51,7 +51,7 @@
                 <form name="employeeView" id="employeeslist_" action="/manager" method="POST" style="color: 1496FF; position:relative; top: 425px; left: 250px;">       
                 <script>
                     window.onload = function() {
-                        var raw = "<%= managerList%>";
+                        var raw = "<%= empList%>";
                         let empList = raw.split(",");
                         var empSelect = document.getElementById("employee")
                         for(var x in empList){
