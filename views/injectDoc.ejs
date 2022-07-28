@@ -56,6 +56,28 @@
       }
     }
     </script>
+    <script type="text/javascript" src="https://js.live.net/v7.2/OneDrive.js"></script>
+    <script type="text/javascript">
+      function launchSaveToOneDrive(){
+        var odOptions = { 
+            clientId: process.env.CLIENT_ID,
+            action: "save",
+            sourceInputElementId: "fileUploadControl",
+            sourceUri: "",
+            fileName: "",
+            openInNewWindow: true,
+            advanced: {},
+            success: function(files) { /* success handler */ },
+            progress: function(percent) { /* progress handler */ },
+            cancel: function() { /* cancel handler */ },
+            error: function(error) { /* error handler */ }
+        };
+        OneDrive.save(odOptions);
+      }
+    </script>
+    
+    <input id="fileUploadControl" name="fileUploadControl" type="file" />
+    <button onclick="launchSaveToOneDrive">Save to OneDrive</button>
   </head>   
   <body>
   <div id="content-container"></div>
@@ -118,7 +140,6 @@
         <br><br>
         <div>
             <label for="Proof">Link to resource (preferably saved in onedrive)</label>
-            <input type="url" id="proof" name="proof">
         </div>
         <br><br>
         <div>

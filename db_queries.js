@@ -5,6 +5,16 @@ const uri = process.env.MONGO_URI
 const client = new MongoClient(uri);
 
 
+async function managagerUpdate(user, manager_id){
+  return new Promise(function(resolve, reject){
+    const connect = client.db("SME_Tracker");
+    connect.collection(user).updateOne({_id: user}, {$set:{manager: manager_id}});
+    return resolve(true);
+  });
+}
+
+
+
 function inject(user, doc){
     //INSERT ONE//
     client.connect(err => {
@@ -20,13 +30,13 @@ function inject(user, doc){
 
 async function employeeListUpdate(manager, emp){
   return new Promise(function(resolve, reject){
-    const connect = client.db("SME_Tracker")
+    const connect = client.db("SME_Tracker");
     connect.collection("managers").updateOne(
       {_id: manager},
       { $addToSet: {Employees: emp}}
-    )
+    );
     return resolve(true)
-  })
+  });
 }
 
 
@@ -34,7 +44,7 @@ async function mgmtList(){
   return new Promise(function(resolve, reject){
     const connect = client.db("SME_Tracker")
     connect.collection("managers").find({}).project({_id:1}).toArray(function(err, result){
-      console.log(result)
+      //console.log(result)
       if(err) {
         return reject(err)
       }
@@ -57,6 +67,17 @@ async function employeeNames(managerEmail){
   });
 }
 
+
+function removeEmp(manager, emp){
+  return new Promise(function(resolve, reject){
+    const connect = client.db("SME_Tracker")
+    connect.collection("managers").updateOne(
+      {_id: manager},
+      {$pull:{Employees: emp}}
+    );
+    return resolve(true);
+  })
+}
 
 function tagQuery(tag, language){
   //TAG QUERY//
@@ -95,7 +116,7 @@ async function empID(user){
       if (err){
         return reject(err)
       }
-      console.log(docs)
+      //console.log(docs)
       return await resolve(docs)
     })
   })
@@ -166,5 +187,7 @@ employeeNames,
 mgmtList,
 newUser,
 employeeListUpdate,
-newManager
+newManager,
+managagerUpdate,
+removeEmp
 };
