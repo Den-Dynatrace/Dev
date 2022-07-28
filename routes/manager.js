@@ -91,7 +91,7 @@ router.post('/', async function(req, res, next){
                       }
                       else{
                         //flash nothing to display
-                        res.redirect("/")
+                        res.redirect("manager")
                       }  
 });
 

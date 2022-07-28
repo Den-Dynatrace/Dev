@@ -19,6 +19,7 @@ async function isMGMT(req, res) {
     for(var mgrs in mgmt){
         if(managerEmail == mgmt[mgrs]["_id"] ){
             res.redirect("manager")
+            req.session.managment = true;
         }
         //console.log(result[mgmt]["_id"])
       }
