@@ -57,25 +57,28 @@
     }
     </script>
 
-    <script type="text/javascript" src="https://js.live.net/v7.2/OneDrive.js"></script>
-    <script type="text/javascript">
-      function launchSaveToOneDrive(){
-        var odOptions = { 
-            clientId: "910cfd22-eb0f-4e34-a653-2956ff8b53f1",
-            action: "save",
-            sourceInputElementId: "fileUploadControl",
-            sourceUri: "",
-            fileName: "",
-            openInNewWindow: true,
-            advanced: {},
-            success: function(files) { /* success handler */ },
-            progress: function(percent) { /* progress handler */ },
-            cancel: function() { /* cancel handler */ },
-            error: function(error) { /* error handler */ }
-        };
-        OneDrive.save(odOptions);
-      }
-    </script>
+<script type="text/javascript" src="https://js.live.net/v7.2/OneDrive.js"></script>
+
+<script type="text/javascript">
+function launchSaveToOneDrive(){
+    var odOptions = { 
+    clientId: "<%= clientID%>",
+    action: "save",
+    sourceInputElementId: "fileUploadControl",
+    sourceUri: "",
+    fileName: "proof.txt",
+    openInNewWindow: true,
+    accountSwitchEnabled: true,
+    success: function(files) {
+      var urlSelect = document.getElementById("proof")
+          urlSelect.options[urlSelect.options.length] = new Option(files["value"][0]["webUrl"], files["value"][0]["webUrl"]);
+      },
+    progress: function(percent) { /* progress handler */ },
+    cancel: function() { console.log("canceled") },
+    error: function(error) { }};
+    OneDrive.save(odOptions);
+}
+</script>
     
   </head>   
   <body>
@@ -110,6 +113,14 @@
 				Add a Document
 			</div>
 
+      <input id="fileUploadControl" name="fileUploadControl" type="file" />
+      <button onclick="launchSaveToOneDrive()">Save to OneDrive</button>
+      <details>
+        <summary>Where to Save</summary>
+        <p>Please navigate to the D1 documents in OneDrive slect "SME Activities Proof Docs" 
+          Then create a folder in you name and add to your named folder.</p>
+      </details>
+
     <form name="form1" id="form1" action="/injectDoc" method="POST" style="color:#1496FF;">
     Catagory: <select name="subject" id="subject">
         <option value="" selected="selected">Select</option>
@@ -137,10 +148,9 @@
             <option value="Docker">Docker</option>
             </select>
         </div>
-        <br><br>
-        
+        <br><br>        
         <div>
-            <label for="Proof">Link to resource (preferably saved in onedrive)</label>
+          <select id="proof" name="proof" disabled="true">prooflink</select>
         </div>
         <br><br>
         <div>

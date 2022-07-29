@@ -4,14 +4,13 @@ var bodyParser = require('body-parser');
 const {inject} = require('../db_queries.js');
 const {isAuthenticated, isMGMT} = require('../public/javascripts/utils.js')
 
-let url = ""
+
 /* GET Inject view */
 router.get('/', isAuthenticated, isMGMT, function(req, res, next) {
-  res.render('injectDoc', {url});
+  res.render('injectDoc', {clientID: process.env.CLIENT_ID});
 });
 
 router.post('/', async function (req, res, next) {
-  console.log(url)
   tokenClaims = req.session.account.idTokenClaims;
   var user = tokenClaims.preferred_username.split("@")
   var overall = await req.body.subject;
