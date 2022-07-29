@@ -1,16 +1,20 @@
 var express = require('express');
 var router = express.Router();
-const {numberQuery, empID} = require('../db_queries.js')
+const {numberQuery, empID, mgmtList, managagerUpdate, newManager, employeeListUpdate, removeEmp } = require('../db_queries.js')
 var queries = require('../individual.js')
 const {isAuthenticated, isMGMT} = require('../public/javascripts/utils.js')
-
+const fetch = require("../public/javascripts/fetch")
+const GRAPH_ME_ENDPOINT = process.env.GRAPH_API_ENDPOINT + "v1.0/me";
 
 
 /* GET profile page. */
-router.get('/', isAuthenticated, isMGMT, async function(req, res, next) {
+router.get('/',isAuthenticated, isMGMT, async function(req, res) {
   tokenClaims = req.session.account.idTokenClaims;
   var user = tokenClaims.preferred_username.split("@")
-  //console.log(user[0])
+  GRAPH_MANAGER = GRAPH_ME_ENDPOINT + "/manager";
+  const manager = await fetch(GRAPH_MANAGER, req.session.accessToken);
+  let manager_id = manager.mail;
+  
   //Variables for totals 
   let results =[];
   let total = 0;
@@ -18,9 +22,31 @@ router.get('/', isAuthenticated, isMGMT, async function(req, res, next) {
   let prodFeedTot = 0;
   let evangelTot = 0;
   let recogTot = 0;
-
+  
+  console.log(user[0])
   id = await empID(user[0])
+  console.log(id)
   if(id.length > 0){
+    //double check that manager hasnt been updated
+    if (id[0].manager != manager_id){
+      await removeEmp(id[0].manager, user[0]);
+      await managagerUpdate(user[0], manager_id);
+      let mgmList = [];
+      const raw = await mgmtList();
+      for(var item in raw){
+          mgmList.push(raw[item]["_id"])
+      }
+      if(!mgmList.includes(manager_id)){
+          await newManager(manager);
+      }
+
+      await employeeListUpdate(manager_id, user[0]);
+
+
+    }
+    
+    
+
     for (let query in queries) {
       //console.log(queries[query])
       val = await numberQuery(queries[query], user[0])
@@ -37,7 +63,7 @@ router.get('/', isAuthenticated, isMGMT, async function(req, res, next) {
     res.render('profile', { i0: id[0].name,
                           i1: id[0].Position,
                           i2: id[0].Location,
-                          a0: results[0][0], //# of sessions
+                          a0: results[0][0], b0: results[0].slice(0),  //# of sessions
                           a1: results[1][0], //# of videos
                           a2: results[2][0], //# of DU Content
                           a3: results[3][0], //# of treainings del.
@@ -81,9 +107,11 @@ router.get('/', isAuthenticated, isMGMT, async function(req, res, next) {
                           v4: recogTot
                         });
   }
+  
   else{
-   res.redirect("auth/acquireToken")
-  }    
+    res.redirect("newUser")
+  }
+   
 });
 
 

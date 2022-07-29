@@ -15,6 +15,7 @@ var authRouter = require('./routes/auth');
 var logRouteRouter = require('./routes/logRoute');
 var newUserRouter = require('./routes/newUser');
 var testRouter = require('./routes/test');
+var deleteUserEntryRouter = require('./routes/deleteUserEntry');
 
 var app = express();
 
@@ -47,6 +48,7 @@ app.use('/auth', authRouter);
 app.use('/logRoute', logRouteRouter);
 app.use('/newUser', newUserRouter);
 app.use('/test', testRouter);
+app.use('/deleteUserEntry', deleteUserEntryRouter);
 
 
 
