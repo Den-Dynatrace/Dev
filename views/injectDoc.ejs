@@ -66,7 +66,7 @@ function launchSaveToOneDrive(){
     action: "save",
     sourceInputElementId: "fileUploadControl",
     sourceUri: "",
-    fileName: "proof.txt",
+    fileName: "",
     openInNewWindow: true,
     accountSwitchEnabled: true,
     success: function(files) {
@@ -117,8 +117,9 @@ function launchSaveToOneDrive(){
       <button onclick="launchSaveToOneDrive()">Save to OneDrive</button>
       <details>
         <summary>Where to Save</summary>
-        <p>Please navigate to the D1 documents in OneDrive slect "SME Activities Proof Docs" 
-          Then create a folder in you name and add to your named folder.</p>
+        <p>Please navigate to the D1 documents in OneDrive slect "SME Activities Proof Docs"<br> 
+          Then create a folder in you name and add the file to your folder.<br>
+          Additional folders may be creted to better organize files for specific SME Catagories</p>
       </details>
 
     <form name="form1" id="form1" action="/injectDoc" method="POST" style="color:#1496FF;">
@@ -150,7 +151,7 @@ function launchSaveToOneDrive(){
         </div>
         <br><br>        
         <div>
-          <select id="proof" name="proof" disabled="true">prooflink</select>
+          <select id="proof" name="proof" >prooflink</select>
         </div>
         <br><br>
         <div>
@@ -165,7 +166,5 @@ function launchSaveToOneDrive(){
       
     
         </form>
-        <input id="fileUploadControl" name="fileUploadControl" type="file" />
-        <button type="submit" onclick="launchSaveToOneDrive()">Save to OneDrive</button>
-    </body>
+       </body>
 </html>
