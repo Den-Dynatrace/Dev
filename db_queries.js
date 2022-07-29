@@ -79,6 +79,7 @@ function removeEmp(manager, emp){
   })
 }
 
+
 function tagQuery(tag, language){
   //TAG QUERY//
   client.connect(err => {
@@ -86,6 +87,7 @@ function tagQuery(tag, language){
     connect.collection
   });
 }
+
 
 async function numberQuery(query, user){ 
 //SIMPLE QUERY//
@@ -109,6 +111,7 @@ return new Promise(function(resolve, reject) {
 })
 }
 
+
 async function empID(user){
   return new Promise(function(resolve, reject) {
     const connect = client.db("SME_Tracker")
@@ -122,16 +125,21 @@ async function empID(user){
   })
 }
 
-function dropCollection(user){
+
+function dropEmp(user){
+  return new Promise(function(resolve, reject){
   client.connect(err => {
     const collection = client.db("SME_Tracker").collection(user)
-    if (err) throw err;
+    if (err) return reject(err);
     collection.drop(function(err, res){
-      if (err) throw err;
+      if (err) return reject(err);
       console.log("Collection Droped")
+      return resolve(true);
     })
   })
+  })
 }
+
 
 async function newUser(userInfo, mgmt){
   id = userInfo.mail.split("@")
@@ -195,6 +203,17 @@ function getCollections(){
   });
 }
 
+function mgmtDelete(manager) {
+  return new Promise(function(resolve, reject){
+    const connect = client.db("SME_Tracker")
+    connect.collection("managers").deleteOne({_id: manager}, function(err){
+      if(err) {return reject(err)}
+      return resolve(true);
+    })
+  })
+}
+
+
 module.exports = {
 numberQuery,
 empID,
@@ -206,5 +225,7 @@ employeeListUpdate,
 newManager,
 managagerUpdate,
 removeEmp,
-getCollections
+getCollections,
+mgmtDelete, 
+dropEmp
 };

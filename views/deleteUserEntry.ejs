@@ -7,8 +7,30 @@
          <meta name="description" content="" >
          <link rel="StyleSheet" href="/stylesheets/deleteman_emppage.css" />
          <script src="https://secure.exportkit.com/cdn/js/ek_googlefonts.js?v=6"></script>
-         <!-- Add your custom HEAD content here -->
- 
+         <script>
+            
+                var mgmtList = "<%= mgmt%>".split(",");
+                var empList = "<%= emps%>".split(",");
+                var subjectObject = {
+                    "Manager": mgmtList,
+                    "Employee": empList
+                }
+                window.onload = function() {
+                var typeSel = document.getElementById("ManagerEmployee");
+                var individualSel = document.getElementById("Individual");
+                for (var x in subjectObject) {
+                    typeSel.options[typeSel.options.length] = new Option(x, x);
+                 }
+                typeSel.onchange = function() {
+                    individualSel.length = 1;
+                    lists = subjectObject[this.value];
+                    for (var y in lists) {
+                        individualSel.options[individualSel.options.length] = new Option(lists[y], lists[y])
+                    }
+                }
+            }
+        </script>
+         
      </head>
      <body>
          <div id="content-container" ></div>
@@ -40,7 +62,7 @@
  
              </div>
  
-             <form name="'form1" id="form1" action="/deleteman_emppage" method = "POST">
+             <form name="'form1" id="form1" action="/deleteUserEntry" method = "POST">
                  Manager/Employee: <select name="ManagerEmployee" id="ManagerEmployee">
                      <option value = "" id="ManagerEmployeeSelect" selected = "selected">Select</option>
                  </select>
