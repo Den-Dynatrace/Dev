@@ -38,6 +38,7 @@ router.post('/user', async function (req, res, next) {
   router.post('/mgmt', async function (req, res, next) {
     
     var user = await req.body.user;
+    console.log(user)
     var overall = await req.body.subject;
     var subcat = await req.body.topic;
     var metric = await req.body.chapter;
@@ -55,7 +56,7 @@ router.post('/user', async function (req, res, next) {
       "Tag" : tag
       }
       //console.log(doc)
-      inject(user[0], doc)
+      inject(user, doc)
       res.redirect('/profile')
     })
 
