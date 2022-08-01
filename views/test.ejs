@@ -18,15 +18,9 @@
           var urlSelect = document.getElementById("prooflink")
               urlSelect.options[urlSelect.options.length] = new Option(files["value"][0]["webUrl"], files["value"][0]["webUrl"]);
           },
-                   
-          /*var elem = document.getElementById("html")
-                                  console.log(files["value"][0]["webUrl"])
-                                  elem.innerHTML = files["value"][0]["webUrl"]
-                                  //document.write("<p id='url'>" + files["value"][0]["webUrl"] + "</p>" )*/
-                                
-        progress: function(percent) { /* progress handler */ },
+        progress: function(percent){ },
         cancel: function() { console.log("canceled") },
-        error: function(error) { }};
+        error: function(error) { console.log(error) }};
         OneDrive.save(odOptions);
     }
    </script>
