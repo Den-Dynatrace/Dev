@@ -73,7 +73,7 @@ queries = [
 
     {"Overall": "Product feedback (product, self-help, internal processes)",
     "Sub-Cat": "Develop content to help deflect chats" ,
-    "metric": "#/%dec. in chats"},
+    "metric": "#/% dec. in chats"},
 
     {"Overall": "Product feedback (product, self-help, internal processes)",
     "Sub-Cat": "Work with Product Management/R&D to improve product self-service",
