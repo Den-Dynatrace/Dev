@@ -17,7 +17,8 @@ router.post('/', async function (req, res, next) {
   var subcat = await req.body.topic;
   var metric = await req.body.chapter;
   var tag = req.body.tags;
-  var proof = await req.body.proof
+  var proof = await req.body.proof;
+  console.log(proof)
   var notes = await req.body.Comment
   doc = {
     "Overall" : overall,

@@ -9,13 +9,14 @@
 		<script src="https://secure.exportkit.com/cdn/js/ek_googlefonts.js?v=6"></script>
 		<script>
 			function getLinks(metric, links){
-				var popupText = document.getElementById(metric);
+				var popupText = document.createElement("ul");
 				var linkAray = links.split(",")
 				for(link in linkAray){
 					let li = document.createElement("li");
 					li.innerHTML = '<a href="'+linkAray[link]+'">'+linkAray[link]+'</a>';
 					popupText.appendChild(li);
 				}
+				document.getElementById(metric).appendChild(popupText);
 			}
 		</script>
 
@@ -252,10 +253,7 @@
 					<div class="wrapper">
 						<a href="#" class="close">&times; Close</a>
 						<div class="content">
-							<div class = "container">
-								<form>
-									<ul id="numSessions"></ul>
-								</form>
+							<div id="numSessions" class = "container">
 							</div>
 						</div>
 						</div>
