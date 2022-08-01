@@ -20,6 +20,14 @@ div { position: absolute; }
 	background:rgba(0,0,0,1);
 }
 
+#user{
+	visibility:hidden;
+}
+
+#proof{
+	visibility:hidden;
+}
+
 #frame {
 	top: 26px;
 	left: 1327px;
@@ -278,9 +286,10 @@ div { position: absolute; }
 	position:fixed;
 	top:380px;
 	left:450px;
+	width:250px;
 	overflow: hidden;
 	font-family: Roboto;
-	font-size: 20px;
+	font-size: 16px;
 	text-align: center;
 	line-height: 22px;
 	padding-top: 10px;
