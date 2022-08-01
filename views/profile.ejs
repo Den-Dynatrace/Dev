@@ -18,7 +18,7 @@
 				var linkAray = links.split(",")
 				for(link in linkAray){
 					let li = document.createElement("li");
-					li.innerHTML = '<a href="'+linkAray[link]+'">'+linkAray[link]+'</a>';
+					li.innerHTML = '<a href="'+linkAray[link]+'" target="_blank">'+linkAray[link]+'</a>';
 					popupText.appendChild(li);
 				}
 				div.appendChild(popupText);
