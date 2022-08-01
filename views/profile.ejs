@@ -9,6 +9,11 @@
 		<script src="https://secure.exportkit.com/cdn/js/ek_googlefonts.js?v=6"></script>
 		<script>
 			function getLinks(metric, links){
+				var div = document.getElementById(metric)
+				oldTable = div.lastChild;
+				if(oldTable){
+					div.removeChild(oldTable);
+				}
 				var popupText = document.createElement("ul");
 				var linkAray = links.split(",")
 				for(link in linkAray){
@@ -16,7 +21,7 @@
 					li.innerHTML = '<a href="'+linkAray[link]+'">'+linkAray[link]+'</a>';
 					popupText.appendChild(li);
 				}
-				document.getElementById(metric).appendChild(popupText);
+				div.appendChild(popupText);
 			}
 		</script>
 
