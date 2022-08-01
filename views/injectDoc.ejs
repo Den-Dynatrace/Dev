@@ -113,7 +113,7 @@ function launchSaveToOneDrive(){
 				Add a Document
 			</div>
 
-    <form name="form1" id="form1" action="/injectDoc" method="POST" style="color:#1496FF;">
+    <form name="form1" id="form1" action="/injectDoc/user" method="POST" style="color:#1496FF;">
     Catagory: <select name="subject" id="subject" required="required">
         <option value="" selected="selected">Select</option>
       </select>
@@ -155,10 +155,17 @@ function launchSaveToOneDrive(){
           Then create a folder in you name and add the file to your folder.<br>
           Additional folders may be creted to better organize files for specific SME Catagories</p>
       </details>
+      <% if (!mgmt)  {%>
         <button id="submit">Submit</button>
+      <% } else {%>
+        <textarea id="user" name="user" rows="1" cols="40"><%= user%></textarea>
+        <button id="submit" formaction="/injectDoc/mgmt">Submit</button>
+      <% }%>
         <select id="proof" name="proof" required="required">Proof Link</select>
         </form>
+        <p>
         <input id="fileUploadControl" name="fileUploadControl" type="file" />
         <button onclick="launchSaveToOneDrive()" id="save">Save to OneDrive</button>
+      </p>
        </body>
 </html>

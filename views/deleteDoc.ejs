@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<script>
+    window.onload = function(){
+        var docString = "<%= docs%>"
+        console.log("<%= docs%>");
+        //var docs = JSON.parse(docString);
+        console.log(docs)
+        var head = document.getElementById("header")
+        head.innerHTML = docs;
+    }
+</script>
+<h1 id="header"></h1>

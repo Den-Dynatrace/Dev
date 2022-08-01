@@ -213,6 +213,16 @@ function mgmtDelete(manager) {
   })
 }
 
+function listAllDocs(user) {
+  return new Promise(function(resolve, reject){
+    const connect = client.db("SME_Tracker")
+    connect.collection(user).find({}).toArray(function(err, docs){
+      if (err) return reject(err);
+      return resolve(docs);
+    })
+  })
+}
+
 
 module.exports = {
 numberQuery,
@@ -227,5 +237,6 @@ managagerUpdate,
 removeEmp,
 getCollections,
 mgmtDelete, 
-dropEmp
+dropEmp,
+listAllDocs
 };
