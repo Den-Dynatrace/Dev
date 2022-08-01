@@ -7,7 +7,17 @@
 		<meta name="description" content="" >
 		<link rel="StyleSheet" href='stylesheets/profilepageuser.css'/>
 		<script src="https://secure.exportkit.com/cdn/js/ek_googlefonts.js?v=6"></script>
-		<!-- Add your custom HEAD content here -->
+		<script>
+			function getLinks(metric, links){
+				var popupText = document.getElementById(metric);
+				var linkAray = links.split(",")
+				for(link in linkAray){
+					let li = document.createElement("li");
+					li.innerHTML = '<a href="'+linkAray[link]+'">'+linkAray[link]+'</a>';
+					popupText.appendChild(li);
+				}
+			}
+		</script>
 
 	</head>
 	<body>
@@ -236,7 +246,7 @@
 
 			<div id="valuebox_ek1"  > <!--# of sessions-->
 				<div class = "box">
-					<a id="rectangle_13"  href="#divOne" class="button"><%= a0 %></a>
+					<a id="rectangle_13"  href="#divOne" class="button" onclick="getLinks('numSessions', '<%= b0%>')"><%= a0 %></a>
 				</div>
 				<div class="overlay" id="divOne">
 					<div class="wrapper">
@@ -244,7 +254,7 @@
 						<div class="content">
 							<div class = "container">
 								<form>
-									<label>Place links here</label>
+									<ul id="numSessions"></ul>
 								</form>
 							</div>
 						</div>

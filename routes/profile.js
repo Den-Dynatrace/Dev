@@ -60,10 +60,11 @@ router.get('/',isAuthenticated, isMGMT, async function(req, res) {
       
       results.push(val)
     }
+    console.log(results[0].slice(1))
     res.render('profile', { i0: id[0].name,
                           i1: id[0].Position,
                           i2: id[0].Location,
-                          a0: results[0][0], b0: results[0].slice(0),  //# of sessions
+                          a0: results[0][0], b0: results[0].slice(1),  //# of sessions
                           a1: results[1][0], //# of videos
                           a2: results[2][0], //# of DU Content
                           a3: results[3][0], //# of treainings del.
