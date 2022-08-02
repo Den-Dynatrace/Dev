@@ -109,7 +109,7 @@ router.get('/signin', async function (req, res, next) {
 router.get('/acquireToken', async function (req, res, next) {
 
     // create a GUID for csrf
-    req.session.csrfToken = cryptoProvider.createNewGuid();
+    //req.session.csrfToken = cryptoProvider.createNewGuid();
 
     // encode the state param
     const state = cryptoProvider.base64Encode(
