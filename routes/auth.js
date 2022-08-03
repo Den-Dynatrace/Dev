@@ -25,7 +25,7 @@ const cryptoProvider = new msal.CryptoProvider();
  * @param authCodeRequestParams: parameters for requesting tokens using auth code
  */
 async function redirectToAuthCodeUrl(req, res, next, authCodeUrlRequestParams, authCodeRequestParams) {
-
+    
     // Generate PKCE Codes before starting the authorization flow
     const { verifier, challenge } = await cryptoProvider.generatePkceCodes();
 
@@ -42,7 +42,8 @@ async function redirectToAuthCodeUrl(req, res, next, authCodeUrlRequestParams, a
      * https://azuread.github.io/microsoft-authentication-library-for-js/ref/modules/_azure_msal_node.html#authorizationurlrequest
      * https://azuread.github.io/microsoft-authentication-library-for-js/ref/modules/_azure_msal_node.html#authorizationcoderequest
      **/
-
+    
+    console.log(REDIRECT_URI);
     req.session.authCodeUrlRequest = {
         redirectUri: REDIRECT_URI,
         responseMode: 'form_post', // recommended for confidential clients
@@ -67,7 +68,8 @@ async function redirectToAuthCodeUrl(req, res, next, authCodeUrlRequestParams, a
 };
 
 router.get('/signin', async function (req, res, next) {
-
+    host = "http://" +req.get('host');
+    REDIRECT_URI = host + REDIRECT_URI;
     // create a GUID for crsf
     req.session.csrfToken = cryptoProvider.createNewGuid();
 
@@ -137,7 +139,7 @@ router.post('/redirect', async function (req, res, next) {
         const state = JSON.parse(cryptoProvider.base64Decode(req.body.state));
 
         // check if csrfToken matches
-        if (state.csrfToken === req.session.csrfToken) {
+        //if (state.csrfToken === req.session.csrfToken) {
             req.session.authCodeRequest.code = req.body.code; // authZ code
             req.session.authCodeRequest.codeVerifier = req.session.pkceCodes.verifier // PKCE Code Verifier
 
@@ -152,20 +154,23 @@ router.post('/redirect', async function (req, res, next) {
             } catch (error) {
                 next(error);
             }
-        } else {
-            next(new Error('csrf token does not match'));
-        }
+        //} else {
+            //next(new Error('csrf token does not match'));
+        //}
     } else {
         next(new Error('state is missing'));
     }
 });
 
 router.get('/signout', function (req, res) {
+    host = "http://" +req.get('host');
     /**
      * Construct a logout URI and redirect the user to end the
      * session with Azure AD. For more information, visit:
      * https://docs.microsoft.com/azure/active-directory/develop/v2-protocols-oidc#send-a-sign-out-request
      */
+    POST_LOGOUT_REDIRECT_URI = host + POST_LOGOUT_REDIRECT_URI;
+    console.log(POST_LOGOUT_REDIRECT_URI);
     const logoutUri = `${msalConfig.auth.authority}/oauth2/v2.0/logout?post_logout_redirect_uri=${POST_LOGOUT_REDIRECT_URI}`;
 
     req.session.destroy(() => {
