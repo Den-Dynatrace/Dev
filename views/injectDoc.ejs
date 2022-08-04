@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="StyleSheet" href='adddocumentpage.css'/>
+    <link rel="StyleSheet" href='stylesheets/adddocumentpage.css'/>
     <script>
     var subjectObject = {
         "Content and lab development": {
@@ -70,8 +70,9 @@ function launchSaveToOneDrive(){
     openInNewWindow: true,
     accountSwitchEnabled: true,
     success: function(files) {
-      var urlSelect = document.getElementById("proof")
-          urlSelect.options[urlSelect.options.length] = new Option(files["value"][0]["webUrl"], files["value"][0]["webUrl"]);
+      var urlSelect = document.getElementById("proof") 
+      var id_URL = files["value"][0]["id"] + "|" + files["value"][0]["webUrl"];
+      urlSelect.options[urlSelect.options.length] = new Option(id_URL, id_URL);
       },
     progress: function(percent) { /* progress handler */ },
     cancel: function() { console.log("canceled") },
