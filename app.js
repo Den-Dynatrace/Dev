@@ -18,6 +18,7 @@ var deleteUserEntryRouter = require('./routes/deleteUserEntry');
 var deleteDocRouter = require('./routes/deleteDoc');
 var mgmtAddDocRouter = require('./routes/mgmtAddDoc');
 var mgmtDeleteDocRouter = require('./routes/mgmtDeleteDoc');
+var testRouter = require('./routes/test');
 
 
 var app = express();
@@ -54,6 +55,7 @@ app.use('/deleteUserEntry', deleteUserEntryRouter);
 app.use('/deleteDoc', deleteDocRouter);
 app.use('/mgmtAddDoc', mgmtAddDocRouter);
 app.use('/mgmtDeleteDoc', mgmtDeleteDocRouter);
+app.use('/test', testRouter);
 
 
 

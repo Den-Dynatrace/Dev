@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
-const path = require('path');
-const {employeeNames,empID,numberQuery} = require("../db_queries");
+const {empID,numberQuery, employeeNames} = require("../db_queries");
+const fetch = require('../public/javascripts/fetch.js')
 var queries = require('../individual.js');
 const {isAuthenticated, mgmtCheck} = require("../public/javascripts/utils")
-express.static(path.join(__dirname, 'public'));
+const GRAPH_DIRECT_REPORTS = process.env.GRAPH_API_ENDPOINT + "v1.0/me/directReports";
 
 
 
@@ -13,12 +13,20 @@ express.static(path.join(__dirname, 'public'));
 router.get('/', isAuthenticated, mgmtCheck, async function(req, res, next) {
   tokenClaims = req.session.account.idTokenClaims;
   var manager = tokenClaims.preferred_username;
+  var directReports = fetch(GRAPH_DIRECT_REPORTS, req.session.accessToken)
+  var emps = directReports["value"]
+  let empIDs = []
+  for(e in emps){
+    id = emps[e]["mail"].split("@")[0].toLowerCase();
+    empID.push(id);
+  }
+
   //console.log(manager)
   var managerCard = await employeeNames(manager)
   res.render('manager', { name : managerCard["name"],
                           email : managerCard["_id"],
                           title : managerCard["Title"],
-                          elist: managerCard["Employees"]})
+                          elist: empIDs})
 });
 
 
