@@ -11,9 +11,10 @@ const GRAPH_ME_ENDPOINT = process.env.GRAPH_API_ENDPOINT + "v1.0/me";
 router.get('/',isAuthenticated, isMGMT, async function(req, res) {
   tokenClaims = req.session.account.idTokenClaims;
   var user = tokenClaims.preferred_username.split("@")
+  user = user[0].toLowerCase()
   GRAPH_MANAGER = GRAPH_ME_ENDPOINT + "/manager";
   const manager = await fetch(GRAPH_MANAGER, req.session.accessToken);
-  let manager_id = manager.mail;
+  let manager_id = manager.mail.toLowerCase();
   
   //Variables for totals 
   let results =[];
@@ -23,13 +24,12 @@ router.get('/',isAuthenticated, isMGMT, async function(req, res) {
   let evangelTot = 0;
   let recogTot = 0;
   
-  console.log(user[0])
-  id = await empID(user[0])
+  
+  id = await empID(user)
   if(id.length > 0){
     //double check that manager hasnt been updated
-    if (id[0].manager != manager_id){
-      await removeEmp(id[0].manager, user[0]);
-      await managagerUpdate(user[0], manager_id);
+    if (id[0].manager.toLowerCase() != manager_id){
+      await managagerUpdate(user, manager_id);
       let mgmList = [];
       const raw = await mgmtList();
       for(var item in raw){
@@ -38,13 +38,8 @@ router.get('/',isAuthenticated, isMGMT, async function(req, res) {
       if(!mgmList.includes(manager_id)){
           await newManager(manager);
       }
-
-      await employeeListUpdate(manager_id, user[0]);
-
-
     }
-    
-    
+        
 
     for (let query in queries) {
       //console.log(queries[query])
@@ -59,7 +54,6 @@ router.get('/',isAuthenticated, isMGMT, async function(req, res) {
       
       results.push(val)
     }
-    console.log(results[0].slice(1))
     res.render('profile', { i0: id[0].name,
                           i1: id[0].Position,
                           i2: id[0].Location,
@@ -113,7 +107,5 @@ router.get('/',isAuthenticated, isMGMT, async function(req, res) {
   }
    
 });
-
-
 
 module.exports = router;

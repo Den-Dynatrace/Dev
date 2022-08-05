@@ -10,6 +10,7 @@ var manager_id = ""
 /* GET login page */
 router.get('/',isAuthenticated,  async function(req, res) {
     //console.log("here")
+    const curentEmpList = await getCollections();
     const userInfo = await fetch(GRAPH_ME_ENDPOINT, req.session.accessToken);
     GRAPH_MANAGER = GRAPH_ME_ENDPOINT + "/manager";
     const manager = await fetch(GRAPH_MANAGER, req.session.accessToken);
@@ -26,15 +27,15 @@ router.get('/',isAuthenticated,  async function(req, res) {
         const GRAPH_EMPLOYEES = GRAPH_ME_ENDPOINT + "/directReports"
         var directReportResponse = await fetch(GRAPH_EMPLOYEES, req.session.accessToken)
         var employees = directReportResponse["value"];
-        var newMGMTID = userInfo.mail.toLowerCase()
+        var newMGMTID = userInfo.mail.toLowerCase();
         for(e in employees) {
-            await newUser(employees[e], newMGMTID );
-            let empID = employees[e]["mail"].split('@')[0].toLowerCase()
-            await employeeListUpdate(newMGMTID, empID )
+            if(curentEmpList.indexOf(id) < 0){
+                await newUser(employees[e], newMGMTID );
+            }
         }
         res.redirect("manager")
-    }
-    else if(!mgmList.includes(manager_id)){
+    
+    }else if(!mgmList.includes(manager_id)){
         await newManager(manager);
     }
 
@@ -49,13 +50,10 @@ router.get('/',isAuthenticated,  async function(req, res) {
   
   router.post('/', isAuthenticated, async function(req,res, next){
     const userInfo = await fetch(GRAPH_ME_ENDPOINT, req.session.accessToken);
-    id = userInfo.mail.split("@")
-    console.log(id[0].toLowerCase())
-    if( await employeeListUpdate(manager_id, id[0].toLowerCase())){
         if(await newUser(userInfo, manager_id)){
             res.redirect("profile")
-            }
         }
+        
   })
   
   module.exports = router;

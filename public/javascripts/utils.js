@@ -40,6 +40,7 @@ async function isMGMT(req, res, next,) {
     next();
     }
 
+    
 /**
  * Attaches a given access token to a MS Graph API call
  * @param endpoint: REST API endpoint to call
